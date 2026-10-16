@@ -1,0 +1,31 @@
+ekf_filter_node:
+  ros__parameters:
+    use_sim_time: false
+    frequency: 30.0
+    two_d_mode: true
+    publish_tf: true
+    map_frame: map
+    odom_frame: odom
+    base_link_frame: base_footprint
+    world_frame: odom
+
+    # Read from the controller we configured
+    odom0: diff_cont/odom
+    # ONLY trust wheels for X velocity (driving straight)
+    odom0_config: [false, false, false,
+                   false, false, false,
+                   true,  false, false,
+                   false, false, false,
+                   false, false, false]
+    odom0_queue_size: 10
+
+    # Read from your MPU6050
+    imu0: imu
+    # ONLY trust IMU for Z angular velocity (turning)
+    imu0_config: [false, false, false,
+                  false, false, false,
+                  false, false, false,
+                  false, false, true,
+                  false, false, false]
+    imu0_queue_size: 20
+    imu0_remove_gravitational_acceleration: true

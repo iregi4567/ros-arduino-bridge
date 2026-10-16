@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.8)
+project(assembly_description)
+find_package(ament_cmake REQUIRED)
+install(DIRECTORY meshes urdf launch config worlds rviz models DESTINATION share/${PROJECT_NAME})
+ament_package()

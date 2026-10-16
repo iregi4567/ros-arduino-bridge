@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!-- PLACEHOLDER 2.4 m x 2.4 m arena. Replace the walls/obstacles with your real gamefield dimensions.
+     Walls are 0.4 m tall so the lidar plane (~0.24 m above ground) sees them. -->
+<sdf version="1.9">
+  <world name="gamefield">
+    <physics name="dart_physics" type="dart">
+      <max_step_size>0.002</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics"/>
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands"/>
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster"/>
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+    <plugin filename="gz-sim-imu-system" name="gz::sim::systems::Imu"/>
+
+    <light type="directional" name="sun">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>0.9 0.9 0.9 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+
+    <model name="ground">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry><plane><normal>0 0 1</normal><size>20 20</size></plane></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><plane><normal>0 0 1</normal><size>20 20</size></plane></geometry>
+          <material><ambient>0.35 0.4 0.35 1</ambient><diffuse>0.35 0.4 0.35 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="arena_walls">
+      <static>true</static>
+      <link name="link">
+        <collision name="n"><pose>0 1.25 0.2 0 0 0</pose><geometry><box><size>2.5 0.05 0.4</size></box></geometry></collision>
+        <visual name="n"><pose>0 1.25 0.2 0 0 0</pose><geometry><box><size>2.5 0.05 0.4</size></box></geometry></visual>
+        <collision name="s"><pose>0 -1.25 0.2 0 0 0</pose><geometry><box><size>2.5 0.05 0.4</size></box></geometry></collision>
+        <visual name="s"><pose>0 -1.25 0.2 0 0 0</pose><geometry><box><size>2.5 0.05 0.4</size></box></geometry></visual>
+        <collision name="e"><pose>1.25 0 0.2 0 0 0</pose><geometry><box><size>0.05 2.5 0.4</size></box></geometry></collision>
+        <visual name="e"><pose>1.25 0 0.2 0 0 0</pose><geometry><box><size>0.05 2.5 0.4</size></box></geometry></visual>
+        <collision name="w"><pose>-1.25 0 0.2 0 0 0</pose><geometry><box><size>0.05 2.5 0.4</size></box></geometry></collision>
+        <visual name="w"><pose>-1.25 0 0.2 0 0 0</pose><geometry><box><size>0.05 2.5 0.4</size></box></geometry></visual>
+        <collision name="obstacle1"><pose>0.5 0.4 0.2 0 0 0.3</pose><geometry><box><size>0.3 0.3 0.4</size></box></geometry></collision>
+        <visual name="obstacle1"><pose>0.5 0.4 0.2 0 0 0.3</pose><geometry><box><size>0.3 0.3 0.4</size></box></geometry></visual>
+        <collision name="obstacle2"><pose>-0.5 -0.5 0.2 0 0 0</pose><geometry><box><size>0.4 0.2 0.4</size></box></geometry></collision>
+        <visual name="obstacle2"><pose>-0.5 -0.5 0.2 0 0 0</pose><geometry><box><size>0.4 0.2 0.4</size></box></geometry></visual>
+      </link>
+    </model>
+  </world>
+</sdf>
