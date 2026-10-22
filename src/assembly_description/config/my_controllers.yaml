@@ -1,0 +1,44 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 30
+    # use_sim_time: true
+
+    diff_cont:
+      type: diff_drive_controller/DiffDriveController
+
+    joint_broad:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    imu_broad:
+      type: imu_sensor_broadcaster/IMUSensorBroadcaster
+      
+    offloader_cont:
+      type: velocity_controllers/JointGroupVelocityController
+
+diff_cont:
+  ros__parameters:
+    publish_rate: 30.0
+    base_frame_id: base_link
+
+    # Corrected to match your Jazzy URDF
+    left_wheel_names: ['front_left_wheel_joint']
+    right_wheel_names: ['front_right_wheel_joint']
+
+    # Corrected to match your CAD parameters (wheel_y * 2 and wheel_radius)
+    wheel_separation: 0.2612
+    wheel_radius: 0.0496
+    use_stamped_vel: false
+    enable_odom_tf: false
+
+joint_broad:
+  ros__parameters: {}
+
+imu_broad:
+  ros__parameters:
+    sensor_name: imu_sensor
+    frame_id: imu_link
+
+offloader_cont:
+  ros__parameters:
+    joints:
+      - offloader_joint

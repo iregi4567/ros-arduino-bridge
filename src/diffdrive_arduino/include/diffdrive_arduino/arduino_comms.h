@@ -24,6 +24,7 @@ public:
   void sendEmptyMsg();
   void readEncoderValues(int &val_1, int &val_2);
   void setMotorValues(int val_1, int val_2);
+  void setOffloaderValue(int val);
   void setPidValues(float k_p, float k_d, float k_i, float k_o);
 
   bool connected() const { return serial_conn_.isOpen(); }

@@ -301,6 +301,7 @@ std::vector<hardware_interface::CommandInterface> DiffDriveArduino::export_comma
 
   command_interfaces.emplace_back(l_wheel_.name, hardware_interface::HW_IF_VELOCITY, &l_wheel_.cmd);
   command_interfaces.emplace_back(r_wheel_.name, hardware_interface::HW_IF_VELOCITY, &r_wheel_.cmd);
+  command_interfaces.emplace_back("offloader_joint", hardware_interface::HW_IF_VELOCITY, &offloader_cmd_);
 
   return command_interfaces;
 }
@@ -311,6 +312,7 @@ CallbackReturn DiffDriveArduino::on_activate(const rclcpp_lifecycle::State &)
   RCLCPP_INFO(logger_, "Starting Controller...");
   arduino_.sendEmptyMsg();
   arduino_.setPidValues(30, 20, 0, 100);
+  arduino_.setOffloaderValue(static_cast<int>(offloader_cmd_));
   return CallbackReturn::SUCCESS;
 }
 

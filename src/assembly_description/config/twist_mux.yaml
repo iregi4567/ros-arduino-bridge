@@ -1,0 +1,13 @@
+twist_mux:
+  ros__parameters:
+    topics:
+      navigation:
+        topic : cmd_vel
+        timeout: 0.5
+        priority: 10
+        stamped: false        # <--- Add this line
+      keyboard:
+        topic : cmd_vel_key
+        timeout: 0.5
+        priority: 90
+        stamped: false        # <--- Add this line

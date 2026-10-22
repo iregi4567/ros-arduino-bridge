@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <ros2_control name="RealRobot" type="system">
+    <hardware>
+      <plugin>diffdrive_arduino/DiffDriveArduino</plugin>
+      <param name="left_wheel_name">left_wheel_joint</param>
+      <param name="right_wheel_name">right_wheel_joint</param>
+      <param name="loop_rate">30</param>
+      <param name="device">/dev/serial/by-id/usb-Arduino__www.arduino.cc__0043_343313235353513042F0-if00</param>
+      <param name="baud_rate">57600</param>
+      <param name="timeout">1000</param>
+      <!-- <param name="enc_counts_per_rev">1980</param> -->
+      <param name="enc_counts_per_rev">980</param>
+    </hardware>
+
+    <!-- Left wheel joint -->
+    <joint name="left_wheel_joint">
+      <command_interface name="velocity">
+        <param name="min">-10</param>
+        <param name="max">10</param>
+      </command_interface>
+      <state_interface name="velocity"/>
+      <state_interface name="position"/>
+    </joint>
+
+    <!-- Right wheel joint -->
+    <joint name="right_wheel_joint">
+      <command_interface name="velocity">
+        <param name="min">-10</param>
+        <param name="max">10</param>
+      </command_interface>
+      <state_interface name="velocity"/>
+      <state_interface name="position"/>
+    </joint>
+
+    <!-- IMU as a "virtual sensor" -->
+    <sensor name="imu_sensor">
+      <!-- Orientation (quaternion) -->
+      <state_interface name="orientation.x"/>
+      <state_interface name="orientation.y"/>
+      <state_interface name="orientation.z"/>
+      <state_interface name="orientation.w"/>
+
+      <!-- Angular velocity -->
+      <state_interface name="angular_velocity.x"/>
+      <state_interface name="angular_velocity.y"/>
+      <state_interface name="angular_velocity.z"/>
+
+      <!-- Linear acceleration -->
+      <state_interface name="linear_acceleration.x"/>
+      <state_interface name="linear_acceleration.y"/>
+      <state_interface name="linear_acceleration.z"/>
+    </sensor>
+  </ros2_control>
+
+  <!-- Gazebo ros2_control plugin -->
+  <gazebo>
+    <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
+      <parameters>$(find dojo)/config/my_controllers.yaml</parameters>
+    </plugin>
+  </gazebo>
+
+</robot>

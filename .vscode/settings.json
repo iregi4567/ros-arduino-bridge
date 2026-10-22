@@ -1,5 +1,5 @@
 {
-    "cmake.sourceDirectory": "/home/limitbreakers/breakers_ws/src/diffdrive_arduino",
+    "cmake.sourceDirectory": "/home/limitbreakers/breakers_26_ws/src/assembly_description",
     "files.associations": {
         "iosfwd": "cpp",
         "deque": "cpp",

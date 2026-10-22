@@ -131,6 +131,7 @@ private:
   double imu_orientation_[4] = {0.0, 0.0, 0.0, 1.0};
   double imu_ax_, imu_ay_, imu_az_;
   double imu_gx_, imu_gy_, imu_gz_;
+  double offloader_cmd_{0.0};
 
   // ------------------ NEW: relay subscriptions ------------------
   rclcpp::Node::SharedPtr node_;
